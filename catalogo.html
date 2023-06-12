@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Catálogo de Productos</title>
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <div class="caja">
+        <h1><img src="imagenes/logo.jpg" class="logo"></h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="catalogo.html">Productos</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="contacto.html">🛒</a></li>
+            </ul>
+        </nav>
+    </div>
+  </header>
+  
+  <div class="container">
+    <h1 class="catalogoTitulo">Catálogo de Productos</h1>
+    
+    <div class="buscarProducto">
+      <input type="text" id="buscar" placeholder="Buscar producto...">
+      <button onclick="buscaProducto()">Buscar</button>
+    </div>
+    
+    <div class="filtros">
+      <label for="filtroPrecio">Filtrar por precio:</label>
+      <select id="filtroPrecio" onchange="filtrar()">
+        <option value="">Todos</option>
+        <option value="0-50">$0 - $50</option>
+        <option value="51-100">$51 - $100</option>
+        <option value="101-200">$101 - $200</option>
+      </select>
+      <label for="filtroDisponibilidad">Filtrar por disponibilidad:</label>
+      <select id="filtroDisponibilidad" onchange="filtrar()">
+        <option value="">Todos</option>
+        <option value="disponible">Disponible</option>
+        <option value="no-disponible">No Disponible</option>
+      </select>
+    </div>
+
+    <ul class="listaProductos">
+      <!-- Producto 1 -->
+      <li class="producto1" precio="99.99" disponibilidad="disponible">
+        <img src="imagenes/mueble1.jpg" alt="Producto 1" class="product-image">
+        <h3 class="nombreProducto">Producto 1</h3>
+        <p class="descripcionProducto">Descripción del producto 1.</p>
+        <p class="precioProducto">Precio: $99.99</p>
+	<a href="https://completa-tu-pago2.payclip.com/33b2e8c0-6622-4782-b193-1c7272aff8b0"><img 	src="https://assets-global.website-files.com/62588b32d8d6105ab7aa9721/63bf568610f3fdf437235192_Preview.svg" 	alt="Logo Paga con Clip" /></a> 
+        <p class="disponibilidadProducto">Disponible: Sí</p>
+        <button onclick="agregarCarrito('Producto 1')" class="botonCarro">Agregar al carrito</button>
+      </li>
+
+      <!-- Producto 2 -->
+      <li class="producto2" precio="49.99" disponibilidad="no-disponible">
+        <img src="imagenes/mueble2.jpg" alt="Producto 2" class="product-image">
+        <h3 class="nombreProducto">Producto 2</h3>
+        <p class="descripcionProducto">Buro de madera de tres cajones, 60cm, acabado en cafe.</p>
+        <p class="precioProducto">Precio: $49.99</p>
+<a href="https://completa-tu-pago2.payclip.com/e35d9e31-388f-4a61-b2ae-7e4e31af4d50"><img src="https://assets-global.website-files.com/62588b32d8d6105ab7aa9721/63bf568610f3fdf437235192_Preview.svg" alt="Logo Paga con Clip" /></a>
+
+
+      <p class="disponibilidadProducto">Disponible: No</p>
+        <button onclick="agregarCarrito('Producto 2')" class="botonCarro">Agregar al carrito</button>
+      </li>
+
+      <!-- Producto 3 -->
+      <li class="producto3" precio="149.99" disponibilidad="disponible">
+        <img src="imagenes/mueble1.jpg" alt="Producto 3" class="product-image">
+        <h3 class="nombreProducto">Producto 3</h3>
+        <p class="descripcionProducto">Mueble de madera de 3 cajones acabado en cafe oscuro.</p>
+        <p class="precioProducto">Precio: $149.99</p>
+<a href="https://completa-tu-pago2.payclip.com/565a6851-f1de-47bc-8124-3816216930aa"><img src="https://assets-global.website-files.com/62588b32d8d6105ab7aa9721/63bf568610f3fdf437235192_Preview.svg" alt="Logo Paga con Clip" /></a>
+
+
+        <p class="disponibilidadProducto">Disponible: Sí</p>
+        <button onclick="agregarCarrito('Producto 3')" class="botonCarro">Agregar al carrito</button>
+      </li>
+
+      <!-- Agrega más productos según sea necesario -->
+
+    </ul>
+
+    <div class="carro">
+      <button class="botonCarro" onclick="verCarro()">Ver Carrito</button>
+    </div>
+  </div>
+
+  <footer>
+    <img src="imagenes/logo.jpg" class="logo">
+    <p class="copyright">&copy Copyright WOOD WORKS - 2023</p>
+  </footer>
+
+  <script>
+    function buscaProducto() {
+      var input = document.getElementById("buscar").value.toLowerCase();
+      var productList = document.getElementsByClassName("listaProductos")[0];
+      var products = productList.getElementsByTagName("li");
+
+      for (var i = 0; i < products.length; i++) {
+        var productName = products[i].getElementsByClassName("nombreProducto")[0].innerText.toLowerCase();
+        if (productName.includes(input)) {
+          products[i].style.display = "";
+        } else {
+          products[i].style.display = "none";
+        }
+      }
+    }
+
+    function filtrar() {
+      var filtroPrecio = document.getElementById("filtroPrecio").value;
+      var filtroDisponibilidad = document.getElementById("filtroDisponibilidad").value;
+      var productList = document.getElementsByClassName("listaProductos")[0];
+      var products = productList.getElementsByTagName("li");
+
+      for (var i = 0; i < products.length; i++) {
+        var price = parseFloat(products[i].getAttribute("precio"));
+        var availability = products[i].getAttribute("disponibilidad");
+
+        var filtroPrecioRange = filtroPrecio.split("-");
+        var filtroPrecioMin = parseFloat(filtroPrecioRange[0]);
+        var filtroPrecioMax = parseFloat(filtroPrecioRange[1]);
+
+        if (
+          (filtroPrecio === "" || (price >= filtroPrecioMin && price <= filtroPrecioMax)) &&
+          (filtroDisponibilidad === "" || availability === filtroDisponibilidad)
+        ) {
+          products[i].style.display = "";
+        } else {
+          products[i].style.display = "none";
+        }
+      }
+    }
+
+    function agregarCarrito(productName) {
+      // Lógica para agregar el producto al carrito
+      console.log("Producto agregado al carrito: " + productName);
+    }
+
+    function verCarro() {
+      // Lógica para ver el carrito
+      console.log("Ver carrito");
+    }
+  </script>
+</body>
+</html>
+
+
+

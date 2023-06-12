@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Carpintería</title>
+        <link rel="stylesheet" href="reset.css">
+        <link rel="stylesheet" href="style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+
+    </head>
+
+    <script>
+        var actual = 0;
+        var ptn;
+        function puntos(n){
+			ptn = document.getElementsByClassName("punto");
+			for(i = 0; i<ptn.length; i++){
+				if(ptn[i].className.includes("activo")){
+					ptn[i].className = ptn[i].className.replace("activo", "");
+					break;
+				}
+			}
+			ptn[n].className += " activo";
+		}
+        function mostrar(n){
+			var imagenes = document.getElementsByClassName("imagen");
+			for(i = 0; i< imagenes.length; i++){
+				if(imagenes[i].className.includes("actual")){
+					imagenes[i].className = imagenes[i].className.replace("actual", "");
+					break;
+				}
+			}
+			actual = n;
+			imagenes[n].className += " actual";
+			puntos(n);
+		}
+        function siguiente(){
+			actual++;
+			if(actual > 1){
+				actual = 0;
+			}
+			mostrar(actual);
+		}
+		function anterior(){
+			actual--;
+			if(actual < 0){
+				actual = 1;
+			}
+			mostrar(actual);
+		}
+        var velocidad = 4000;
+		var play = setInterval("siguiente()", velocidad);
+			
+		function playpause(){
+			var boton = document.getElementById("btn");
+			if(play === null){
+				boton.src = "imagenes/pause.png";
+				play = setInterval("siguiente()", velocidad);
+			} else {
+				clearInterval(play);
+				play = null;
+				boton.src = "imagenes/play.png";
+			}
+		}
+    </script>
+
+    <body>
+
+        <header>
+            <div class="caja">
+                <h1><img src="imagenes/logo.jpg" class="logo"></h1>
+                <nav>
+                    <ul>
+                        <li><a href="index.php">Home</a></li>
+                        <li><a href="catalogo.html">Productos</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="contacto.html">🛒</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <section class="carrusel">
+            
+            <div class="imagen actual">
+				<img src="imagenes/mueble1.jpg">
+			</div>
+			
+			<div class="imagen">
+				<img src="imagenes/mueble2.jpg">
+			</div>
+
+            <a href="#" class="anterior" onclick="anterior();">&#10094;</a>
+			<a href="#" class="siguiente" onclick="siguiente();">&#10095;</a>
+
+            <div class="puntos">
+				<span class="punto activo" onclick="mostrar(0);"></span>
+				<span class="punto" onclick="mostrar(1);"></span>
+				
+			</div>
+
+            <div class="boton">
+				<a href="#">
+					<img src="imagenes/pause.png" id="btn" onclick="playpause();" style="width:30px; height:30px;" />
+				</a>
+			</div>
+			
+        </section>
+
+        <main>
+            
+            <section class="principal">
+
+                <h2 class="titulo-principal">Sobre la Carpintera WOOD WORKS</h2>
+            
+                <p>Ubicada en el corazón de la ciudad, la <strong>carpintera WOOD WORKS</strong> trae para el mercado lo mejor para su hogar. Fundada en 2023, la carpintera WOOD WORKS ya es de destaque en la ciudad y conquista nuevos clientes diariamente.</p>
+    
+                <p id="mision"><em>Nuestra misión es: <strong>"Proporcionar comodidad y calidad de vida a nuestros clientes"</strong>.</em></p>
+    
+                <p>Ofrecemos profesionales experimentados que están constantemente observando los cambios y movimientos en el mundo de los muebles, para así ofrecer a nuestros clientes estilos únicos e innovadores. El atendimiento posee un padrón de excelencia y agilidad, garantizando calidad y satisfacción de nuestros clientes.</p>
+    
+            </section>
+
+            <section class="mapa">
+
+                <h3 class="titulo-principal">Nuestra Ubicación</h3>
+                <p>Nuestro establesimiento esta ubicado en el corazón de la ciudad</p>
+
+                <div class="mapa-contenido">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.4288410024983!2d-46.6360652892379!3d-23.58894837869235!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce5a2b2ed7f3a1%3A0xab35da2f5ca62674!2sCaelum%20-%20Education%20and%20Innovation!5e0!3m2!1ses-419!2smx!4v1682919042197!5m2!1ses-419!2smx" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+
+            </section>
+            
+        </main>
+
+        <footer>
+            <img src="imagenes/logo.jpg" class="logo">
+            <p class="copyright">&copy Copyright WOOD WORKS - 2023</p>
+        </footer>
+
+    </body>
+
+</html>

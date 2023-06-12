@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Catálogo de Productos</title>
+  <style>
+    /* Estilos CSS para el catálogo */
+    body {
+      font-family: Arial, sans-serif;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ccc;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    .pay-button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      text-align: center;
+      text-decoration: none;
+      display: none;
+      font-size: 14px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+    .view-product-button {
+      background-color: #008CBA;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 14px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+    .remove-from-cart-button {
+      background-color: #FF0000;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 14px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+    #search-bar {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Catálogo de Productos</h1>
+
+  <input type="text" id="search-bar" placeholder="Buscar productos..." oninput="filterProducts()">
+
+  <table id="product-table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Precio</th>
+        <th>Disponible</th>
+        <th>Pagar</th>
+        <th>Ver Producto</th>
+        <th>Quitar del Carrito</th>
+      </tr>
+    </thead>
+    <tbody id="product-table-body">
+    </tbody>
+  </table>
+
+  <script>
+    var products = [
+      {
+        id: 1,
+        name: "Producto 1",
+        description: "Mueble de 3 cajones de madera",
+        price: "$99.99",
+	available: true
+      },
+      {
+        id: 2,
+        name: "Producto 2",
+        description: "Descripción del producto 2.",
+        price: "$49.99",
+        available: false
+      },
+      {
+        id: 3,
+        name: "Producto 3",
+        description: "Descripción del producto 3.",
+        price: "$149.99",
+        available: true
+      }
+      // Agrega más productos según sea necesario
+    ];
+
+    var productTableBody = document.getElementById("product-table-body");
+
+    for (var i = 0; i < products.length; i++) {
+      var product = products[i];
+
+      var row = document.createElement("tr");
+
+      var nameCell = document.createElement("td");
+      nameCell.textContent = product.name;
+      row.appendChild(nameCell);
+
+      var descriptionCell = document.createElement("td");
+      descriptionCell.textContent = product.description;
+      row.appendChild(descriptionCell);
+
+      var priceCell = document.createElement("td");
+      priceCell.textContent = product.price;
+      row.appendChild(priceCell);
+
+      var availabilityCell = document.createElement("td");
+      availabilityCell.textContent = product.available ? "Sí" : "No";
+      availabilityCell.setAttribute("dispo", product.available ? "si" : "no");
+      row.appendChild(availabilityCell);
+
+      var payButtonCell = document.createElement("td");
+      var payButton = document.createElement("button");
+      payButton.textContent = "Pagar";
+      payButton.className = "pay-button";
+      payButton.onclick = payProduct.bind(null, product.id);
+      payButtonCell.appendChild(payButton);
+      row.appendChild(payButtonCell);
+
+      var viewProductButtonCell = document.createElement("td");
+      var viewProductButton = document.createElement("button");
+      viewProductButton.textContent = "Ver Producto";
+      viewProductButton.className = "view-product-button";
+      viewProductButton.onclick = viewProduct.bind(null, product.id);
+      viewProductButtonCell.appendChild(viewProductButton);
+      row.appendChild(viewProductButtonCell);
+
+      var removeFromCartButtonCell = document.createElement("td");
+      var removeFromCartButton = document.createElement("button");
+      removeFromCartButton.textContent = "Quitar del Carrito";
+      removeFromCartButton.className = "remove-from-cart-button";
+      removeFromCartButton.onclick = removeFromCart.bind(null, product.id, row);
+      removeFromCartButtonCell.appendChild(removeFromCartButton);
+      row.appendChild(removeFromCartButtonCell);
+
+      productTableBody.appendChild(row);
+    }
+
+    function payProduct(productId) {
+      console.log("Pagando por el producto " + productId);
+    }
+
+    function viewProduct(productId) {
+      console.log("Viendo el producto " + productId);
+    }
+
+    function removeFromCart(productId, row) {
+      console.log("Quitando el producto " + productId + " del carrito");
+      row.parentNode.removeChild(row);
+    }
+
+    function filterProducts() {
+      var input = document.getElementById("search-bar").value.toLowerCase();
+      var table = document.getElementById("product-table");
+      var rows = table.getElementsByTagName("tr");
+
+      for (var i = 0; i < rows.length; i++) {
+        if (products == input) {
+          rows[i].style.display = "";
+          console.log(products)
+        } else {
+          console.log(product.name)
+          rows[i].style.display = "none";
+        }
+      }
+    }
+
+    var availabilityCells = document.getElementsByClassName("estadoDisponible");
+    for (var i = 0; i < availabilityCells.length; i++) {
+      var dispp = availabilityCells[i].getAttribute("dispo");
+      if (dispp == "si") {
+        var payButtonCell = availabilityCells[i].parentNode.querySelector(".pay-button");
+        payButtonCell.style.display = "inline-block";
+      }
+    }
+  </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
