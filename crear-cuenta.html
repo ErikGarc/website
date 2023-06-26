@@ -6,6 +6,31 @@
         <title>Carpintería</title>
         <link rel="stylesheet" href="reset.css">
         <link rel="stylesheet" href="style.css">
+
+        <script>
+            function SoloLetras(e)
+{
+key = e.keyCode || e.which;
+tecla = String.fromCharCode(key).toString();
+letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZÁÉÍÓÚabcdefghijklmnopqrstuvwxyzáéíóú";
+
+especiales = [8,13];
+tecla_especial = false
+for(var i in especiales) {
+if(key == especiales[i]){
+ tecla_especial = true;
+ break;
+}
+}
+
+if(letras.indexOf(tecla) == -1 && !tecla_especial)
+{
+ alert("Ingresar solo letras");
+ return false;
+}
+}
+
+        </script>
     </head>
     <body>
         <header>
@@ -29,7 +54,7 @@
                 <input type="tex" id="nombreUsuario" class="input-padron" required>
 
                 <label for="nombreCliente">Nombre</label>
-                <input type="tex" id="nombreCliente" class="input-padron" required>
+                <input type="tex" onkeypress="return SoloLetras(event);" id="nombreCliente" class="input-padron" required>
 
                 <label for="apellidoClientePat">Apellido Paterno</label>
                 <input type="text" id="apellidoClientePat" class="input-padron" required>
