@@ -7,7 +7,8 @@
         <link rel="stylesheet" href="reset.css">
         <link rel="stylesheet" href="style.css">
 
-        <script>
+
+  <script>
             function SoloLetras(e)
 {
 key = e.keyCode || e.which;
@@ -29,6 +30,27 @@ if(letras.indexOf(tecla) == -1 && !tecla_especial)
  return false;
 }
 }
+
+function SoloNumeros(evt)
+{
+if(window.event){
+keynum = evt.keyCode;
+}
+else{
+keynum = evt.which;
+}
+
+if((keynum > 47 && keynum < 58) || keynum == 8 || keynum== 13)
+{
+return true;
+}
+else
+{
+alert("Ingresar solo numeros, (10 numeros maximo)");
+return false;
+}
+}
+
 
         </script>
     </head>
@@ -54,19 +76,19 @@ if(letras.indexOf(tecla) == -1 && !tecla_especial)
                 <input type="tex" id="nombreUsuario" class="input-padron" required>
 
                 <label for="nombreCliente">Nombre</label>
-                <input type="tex" onkeypress="return SoloLetras(event);" id="nombreCliente" class="input-padron" required>
+                <input type="tex" id="nombreCliente" class="input-padron" onkeypress="return SoloLetras(event);" required>
 
                 <label for="apellidoClientePat">Apellido Paterno</label>
-                <input type="text" id="apellidoClientePat" class="input-padron" required>
+                <input type="text" id="apellidoClientePat" class="input-padron" onkeypress="return SoloLetras(event);" required>
 
                 <label for="apellidoClienteMat">Apellido Materno</label>
-                <input type="text" id="apellidoClienteMat" class="input-padron" required>
+                <input type="text" id="apellidoClienteMat" class="input-padron" onkeypress="return SoloLetras(event);" required>
 
                 <label for="correoElectronico">Correo Electrónico</label>
                 <input type="email" id="correoElectronico" class="input-padron" required placeholder="email@dominio.com">
 
                 <label for="telefono">Telefono</label>
-                <input type="tel" id="telefono" class="input-padron" required placeholder="(55) 55555555">
+                <input type="tel" id="telefono" class="input-padron" onkeypress="return SoloNumeros(event);" maxlength="10" required placeholder="(55) 55555555">
 
                 <label for="contrasenia">Contraseña</label>
                 <input type="password" id="contrasenia" class="input-padron" required placeholder="********">
